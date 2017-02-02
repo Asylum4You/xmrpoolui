@@ -35,9 +35,7 @@ gulp.task('connect', function() {
 
 gulp.task('vendor', function() {
   return gulp.src([
-    'app/vendor/**/font-awesome.min.css',
     'app/vendor/**/angular-material.css',
-    'app/vendor/**/dist/web-font/style.css',
     'app/vendor/**/dist/jquery.js',
     'app/vendor/**/angular-animate.js',
     'app/vendor/**/angular-aria.js',
@@ -47,10 +45,7 @@ gulp.task('vendor', function() {
     'app/vendor/**/ngStorage.js',
     'app/vendor/**/angular-moment.js',
     'app/vendor/**/app/angular.audio.js',
-    'app/vendor/**/moment.js',
-    'app/vendor/**/fonts/*.woff2',
-    'app/vendor/**/fonts/*.woff',
-    'app/vendor/**/fonts/*.tff'
+    'app/vendor/**/moment.js'
     ])
     .pipe(gulp.dest('build/vendor'))
 });

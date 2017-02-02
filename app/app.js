@@ -10,7 +10,8 @@ var app = angular.module('poolui', [
 	'utils.strings',
 	'utils.services'
 ]).config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-	// $locationProvider.hashPrefix('!');
+	$locationProvider.hashPrefix('');
+	// $mdIconProvider.defaultIconSet("https://rawgit.com/angular/material-start/es5-tutorial/app/assets/svg/avatars.svg", 128)
 
 	$routeProvider
 		.when('/home', {
@@ -59,7 +60,9 @@ var app = angular.module('poolui', [
 
 	}]);
 
-app.controller('AppCtrl', function($scope, $window, $route, dataService, timerService, minerService, $localStorage, ngAudio){
+app.controller('AppCtrl', function($scope, $window, $route, $mdSidenav, $mdMedia, dataService, timerService, minerService, $localStorage, ngAudio){
+	var appCache = window.applicationCache;
+
 	$scope.poolList = ["pplns", "pps", "solo"];
 	$scope.poolStats = {};
     $scope.lastBlock = {};
@@ -68,12 +71,27 @@ app.controller('AppCtrl', function($scope, $window, $route, dataService, timerSe
 	$scope.yourTotalHashRate = 0;
 
 	// Hashrate Alarm
+	$scope.globalSiren = false;
+	$scope.sirenAudio = ngAudio.load("assets/ding.wav");
 	$scope.$storage = $localStorage.$default({
     	hashRateLimit: 42
 	});
-	$scope.globalSiren = false;
-	$scope.sirenAudio = ngAudio.load("assets/ding.wav");
 
+	
+	// Sidebar Toggle Stuff
+	$scope.menuOpen = $mdMedia('gt-md');
+	$scope.$watch(function() { return $mdMedia('gt-md'); }, function(big) {
+    	$scope.menuOpen = $mdMedia('gt-md');
+  	});
+
+	$scope.toggleSidenav = function (){
+		if (!$mdMedia('gt-md')) {
+			$mdSidenav('left').toggle();
+		} else {
+			// toggle boolean
+			$scope.menuOpen = !$scope.menuOpen;
+		}
+	}
 
 	// Update global hashrate and set off alarm if any of the tracked addresses fall below the threshold
 	var updateHashRate = function (addrStats){
@@ -94,24 +112,23 @@ app.controller('AppCtrl', function($scope, $window, $route, dataService, timerSe
 		($scope.globalSiren) ? $scope.sirenAudio.play() : $scope.sirenAudio.stop();
 	}
 
+	var update = function() {
+		
+		if (appCache.status == window.applicationCache.UPDATEREADY) {
+			appCache.swapCache();  // The fetch was successful, swap in the new cache.
+			$window.location.reload();
+		}
+	}
+
+	appCache.addEventListener("updateready", function(event) {
+		console.log("UpdateReady Event Caught");
+		update();
+	}, false);
+
 	var updateCache = function () {
 		var appCache = window.applicationCache;
-
-		var update = function() {
-			if (appCache.status == window.applicationCache.UPDATEREADY) {
-				appCache.swapCache();  // The fetch was successful, swap in the new cache.
-				$window.location.reload();
-			}
-		}
-
-		appCache.addEventListener("updateready", function(event) {
-		    console.log("UpdateReady Event Caught");
-		    update();
-		}, false);
-		
 		update();
 		 // appCache.update(); Attempt to update the user's cache.
-		
 	}
 
 	var loadData = function () {
@@ -127,7 +144,7 @@ app.controller('AppCtrl', function($scope, $window, $route, dataService, timerSe
 
 	// Set active page in the sidebar
 	$scope.isActivePage = function(page) {
-		return ($route.current && ($route.current.activetab == page)) ? 'active' : '';
+		return ($route.current && ($route.current.activetab == page)) ? 'selected' : '';
 	}
 
 	// Start the timer and register global requests
@@ -145,37 +162,5 @@ app.controller('AppCtrl', function($scope, $window, $route, dataService, timerSe
 		}
 	);
 
-	
-	// Some jquery helpers to run on document ready
-	angular.element(document).ready(function () {
-
-		$('.btn-toggle-fullwidth').on('click', function() {
-			if(!$('body').hasClass('layout-fullwidth')) {
-				$('body').addClass('layout-fullwidth');
-			} else {
-				$('body').removeClass('layout-fullwidth');
-			}
-
-			$(this).find('.lnr').toggleClass('lnr-arrow-left-circle lnr-arrow-right-circle');
-
-			if($(window).innerWidth() < 1025) {
-				if(!$('body').hasClass('offcanvas-active')) {
-					$('body').addClass('offcanvas-active');
-				} else {
-					$('body').removeClass('offcanvas-active');
-				}
-			}
-		});
-
-		$(window).on('load resize', function() {
-			if($(this).innerWidth() < 1025) {
-				$('body').addClass('layout-fullwidth');
-			} else {
-				$('body').removeClass('layout-fullwidth');
-			}
-		});
-
-
-	});
 
 });
