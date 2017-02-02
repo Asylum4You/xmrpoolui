@@ -3,7 +3,7 @@
 // Declare app level module which depends on views, and components
 var app = angular.module('poolui', [
 	'ngRoute',
-	'ui.bootstrap',
+	'ngMaterial',
 	'angularMoment',
 	'ngStorage',
 	'ngAudio',

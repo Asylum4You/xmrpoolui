@@ -12,11 +12,13 @@ angular.module('utils.services', [])
             url: apiURL + url,
             // params: 'limit=10, sort_by=created:desc',
             // headers: {'Authorization': 'Token token=xxxxYYYYZzzz'}
-        }).success(function(data){
-            // With the data succesfully returned, call our callback
-            callbackFunc(data);
-        }).error(function(){
-            if (errCallback && data != undefined) errCallback(data); else console.log("Network Error");
+        }).then(function successCallback(response) {
+          // With the data succesfully returned, call our callback
+          callbackFunc(response.data);
+        }, function errorCallback(response) {
+          if (errCallback && response != undefined) errCallback(response); else console.log("Network Error", response);
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
         });
      }
 })
