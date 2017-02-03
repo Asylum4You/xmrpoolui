@@ -4,6 +4,15 @@ html, body {
   height:100%;
   margin: 0px;
   padding: 0px;
+  background: "#f3f5f7";
+}
+
+md-sidenav {
+  background-color: #2b333e;
+}
+
+.md-menu-toolbar {
+  background: #00796B;
 }
 
 md-list-item > button {
@@ -11,22 +20,12 @@ md-list-item > button {
   text-align:left !important;
 }
 
-#content  {
-  padding: 40px;
+.sidenav a {
+  width: 100%;
+  text-align: left;
+  color: #fff
 }
 
-.avatar {
-  position: relative;
-  width: 128px;
-  height: 128px;
-  border: 1px solid #ddd;
-  border-radius: 50%;
-  display: inline-block;
-  overflow: hidden;
-  margin: 0px;
-  vertical-align: middle;
-  zoom:0.70;
-  transform: translateZ(0);
-  -webkit-transform: scale(0.70);
-  -moz-transform:scale(0.70);
+#content  {
+  padding: 40px;
 }

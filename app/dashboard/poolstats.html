@@ -1,0 +1,55 @@
+<div layout-sm="column" layout="row" flex>
+	<div layout="column" flex>
+		<md-card>
+			<md-card-title>
+				<md-card-title-media>
+					<div class="md-media-sm card-media"></div>
+				</md-card-title-media>
+				<md-card-title-text>
+					<span class="md-headline">{{poolStats.global.hashRate | toHashRate}}</span>
+					<span class="md-subhead">Pool Hashrate</span>
+				</md-card-title-text>
+			</md-card-title>
+		</md-card>
+	</div>
+	<div layout="column" flex>
+		<md-card>
+			<md-card-title>
+				<md-card-title-media>
+					<div class="md-media-sm card-media"></div>
+				</md-card-title-media>
+				<md-card-title-text>
+					<span class="md-headline">{{poolStats.global.miners}}</span>
+					<span class="md-subhead">Miners Connected</span>
+				</md-card-title-text>
+			</md-card-title>
+		</md-card>
+	</div>
+	<div layout="column" flex>
+		<md-card>
+			<md-card-title>
+				<md-card-title-media>
+					<div class="md-media-sm card-media"></div>
+				</md-card-title-media>
+				<md-card-title-text>
+					<span class="md-headline">{{poolStats.global.totalBlocksFound}}</span>
+					<span class="md-subhead">Blocks Found (<span am-time-ago="poolStats.global.lastBlockFoundTime*1000" uib-tooltip="{{poolStats.global.lastBlockFoundTime*1000 | date:'hh:mm:ss dd/mm/yy'}}" tooltip-placement="bottom"></span>)</span>
+				</md-card-title-text>
+			</md-card-title>
+		</md-card>
+	</div>
+	<div layout="column" flex>
+		<md-card>
+			<md-card-title>
+				<md-card-title-media>
+					<div class="md-media-sm card-media"></div>
+				</md-card-title-media>
+				<md-card-title-text>
+					<span class="md-headline">{{poolStats.global.totalMinersPaid}}</span>
+					<span class="md-subhead">Miners Paid</span>
+				</md-card-title-text>
+
+			</md-card-title>
+		</md-card>
+	</div>
+</div>

@@ -24,14 +24,14 @@
   <![endif]-->
 
     <div class="container" layout="row" flex>
-      <md-sidenav md-is-locked-open="menuOpen" md-component-id="left" md-whiteframe="4">
+      <md-sidenav md-is-locked-open="menuOpen" md-component-id="left" md-whiteframe="4" class="sidenav">
         <md-toolbar class="md-theme-indigo">
           <h1 class="md-toolbar-tools">XMRPool.net</h1>
         </md-toolbar>
         <md-list>
           <md-list-item>
               <md-button href="#/home" ng-class="isActivePage('home')">
-                <md-icon md-svg-icon="" class="avatar"></md-icon>
+                <md-icon md-font-set="material-icons" md-font-icon="home" class="avatar"></md-icon>
                 Home
               </md-button>
           </md-list-item>
@@ -66,9 +66,15 @@
               </md-button>
           </md-list-item>
           <md-list-item>
-              <md-button href="#/help/getting_started" ng-class="isActivePage('help')">
+              <md-button href="#/help/getting_started" ng-class="isActivePage('help/getting_started')">
                 <md-icon md-svg-icon="" class="avatar"></md-icon>
                 Getting Started
+              </md-button>
+          </md-list-item>
+          <md-list-item>
+              <md-button href="#/help/faq" ng-class="isActivePage('help/faq')">
+                <md-icon md-svg-icon="" class="avatar"></md-icon>
+                FAQ
               </md-button>
           </md-list-item>
         </md-list>
@@ -80,6 +86,9 @@
             <md-button class="md-icon-button" type="button" ng-click="toggleSidenav()">
               <md-icon md-font-set="material-icons" md-font-icon="menu">menu</md-icon>
             </md-button>
+              <h3 flex><a>Network : <b>{{network.difficulty | difficultyToHashRate | toHashRate}}</b></a></li>
+              <h3 flex><a>Pool : <b>{{poolStats.global.hashRate | toHashRate}}</b></a></li>
+              <h3 flex><a href="#/dashboard">You : <b>{{yourTotalHashRate | toHashRate}}</b></a></li>
           </div>
         </md-toolbar>
         <div id="content" ng-view></div>
@@ -87,44 +96,8 @@
     </div>
     
     </div>
-    <!-- END SIDEBAR -->
-    <!-- MAIN -->
-<!--     <div class="main">
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-btn">
-            <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
-          </div>
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-menu">
-              <span class="sr-only">Toggle Navigation</span>
-              <i class="fa fa-bars icon-nav"></i>
-            </button>
-          </div>
-          <div id="navbar-menu" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav hidden-xs">
-              <li><a>Network : <b>{{network.difficulty | difficultyToHashRate | toHashRate}}</b></a></li>
-              <li><a>Pool : <b>{{poolStats.global.hashRate | toHashRate}}</b></a></li>
-              <li><a href="#/dashboard">You : <b>{{yourTotalHashRate | toHashRate}}</b></a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="dropdown">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#/help/getting_started">Ports</a></li>
-                  <li><a href="#/help/faq">FAQ</a></li>
-                  <li><a href="#/help/chat">Chat</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-    </div> -->
-    <!-- END MAIN -->
   </div>
-  <!-- END WRAPPER -->
+  <!-- Scripts -->
   <script src="vendor/jquery/dist/jquery.js"></script>
   <script src="vendor/moment/moment.js"></script>
   <script src="vendor/angular/angular.js"></script>

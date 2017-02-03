@@ -1,41 +1,4 @@
-<div class="row">
-	<div class="col-md-3">
-	  <div class="metric">
-		<span class="icon"><i class="fa fa-hashtag"></i></span>
-		<p>
-		  <span class="number">{{poolStats.global.hashRate | toHashRate}}</span>
-		  <span class="title">Hashrate</span>
-		</p>
-	  </div>
-	</div>
-	<div class="col-md-3">
-	  <div class="metric">
-		<span class="icon"><i class="fa fa-truck"></i></span>
-		<p>
-		  <span class="number">{{poolStats.global.miners}}</span>
-		  <span class="title">Miners Connected</span>
-		</p>
-	  </div>
-	</div>
-	<div class="col-md-3">
-	  <div class="metric">
-	    <span class="icon"><i class="fa fa-database"></i></span>
-	    <p>
-	      <span class="number">{{poolStats.global.totalBlocksFound}}</span>
-	      <span class="title">Blocks Found (Last <span am-time-ago="poolStats.global.lastBlockFoundTime*1000" uib-tooltip="{{poolStats.global.lastBlockFoundTime*1000 | date:'hh:mm:ss dd/mm/yy'}}" tooltip-placement="bottom"></span>)</span>
-	    </p>
-	  </div>
-	</div>
-	<div class="col-md-3">
-	  <div class="metric">
-		<span class="icon"><i class="fa fa-money"></i></span>
-		<p>
-		  <span class="number">{{poolStats.global.totalMinersPaid}}</span>
-		  <span class="title">Miners Paid</span>
-		</p>
-	  </div>
-	</div>
-</div>
+<ng-include src="'dashboard/poolstats.html'"></ng-include>
 <div class="row">
 	<div class="col-md-4">
 		<!-- NETWORK STATS -->
