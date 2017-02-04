@@ -10,10 +10,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <!-- CSS -->
   <link rel="stylesheet" href="vendor/angular-material/angular-material.css">
+  <link rel="stylesheet" href="vendor/angular-material-data-table/dist/md-data-table.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono:700" rel="stylesheet">
   <link rel="stylesheet" href="app.css">
-  <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">  
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Oxygen+Mono" rel="stylesheet">
   <!-- ICONS -->
   <link rel="apple-touch-icon" sizes="76x76" href="assets/assets/apple-icon.png">
   <link rel="icon" type="image/png" sizes="96x96" href="assets/assets/favicon.png">
@@ -25,8 +28,8 @@
 
     <div class="container" layout="row" flex>
       <md-sidenav md-is-locked-open="menuOpen" md-component-id="left" md-whiteframe="4" class="sidenav">
-        <md-toolbar class="md-theme-indigo">
-          <h1 class="md-toolbar-tools">XMRPool.net</h1>
+        <md-toolbar class="logo">
+          <h1 class="md-toolbar-tools">XMRPool.net <i class="md-caption">beta</i></h1>
         </md-toolbar>
         <md-list>
           <md-list-item>
@@ -84,14 +87,14 @@
         <md-toolbar>
           <div class="md-toolbar-tools">
             <md-button class="md-icon-button" type="button" ng-click="toggleSidenav()">
-              <md-icon md-font-set="material-icons" md-font-icon="menu">menu</md-icon>
+              <md-icon md-font-set="material-icons">menu</md-icon>
             </md-button>
               <h3 flex><a>Network : <b>{{network.difficulty | difficultyToHashRate | toHashRate}}</b></a></li>
               <h3 flex><a>Pool : <b>{{poolStats.global.hashRate | toHashRate}}</b></a></li>
               <h3 flex><a href="#/dashboard">You : <b>{{yourTotalHashRate | toHashRate}}</b></a></li>
           </div>
         </md-toolbar>
-        <div id="content" ng-view></div>
+        <div id="content" ng-view flex></div>
       </md-content>
     </div>
     
@@ -105,6 +108,7 @@
   <script src="vendor/angular-animate/angular-animate.js"></script>
   <script src="vendor/angular-aria/angular-aria.js"></script>
   <script src="vendor/angular-material/angular-material.js"></script>
+  <script src="vendor/angular-material-data-table/dist/md-data-table.js"></script>
   <script src="vendor/ngstorage/ngStorage.js"></script>
   <script src="vendor/angular-moment/angular-moment.js"></script>
   <script src="vendor/angular-audio/app/angular.audio.js"></script>

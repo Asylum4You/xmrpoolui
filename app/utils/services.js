@@ -19,7 +19,7 @@ angular.module('utils.services', [])
           if (errCallback && response != undefined) errCallback(response); else console.log("Network Error", response);
           // called asynchronously if an error occurs
           // or server returns response with an error status.
-        });
+        }).$promise;
      }
 })
 

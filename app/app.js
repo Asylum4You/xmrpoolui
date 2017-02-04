@@ -4,14 +4,19 @@
 var app = angular.module('poolui', [
 	'ngRoute',
 	'ngMaterial',
+	'md.data.table',
 	'angularMoment',
 	'ngStorage',
 	'ngAudio',
 	'utils.strings',
 	'utils.services'
-]).config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+]).config(['$locationProvider', '$routeProvider', '$mdThemingProvider', function($locationProvider, $routeProvider, $mdThemingProvider) {
 	$locationProvider.hashPrefix('');
 	// $mdIconProvider.defaultIconSet("https://rawgit.com/angular/material-start/es5-tutorial/app/assets/svg/avatars.svg", 128)
+	
+	$mdThemingProvider.theme('default')
+    .primaryPalette('blue')
+    .accentPalette('blue-grey');
 
 	$routeProvider
 		.when('/home', {

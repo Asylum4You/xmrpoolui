@@ -6,7 +6,7 @@ app.controller('DashboardCtrl', function($scope , $route, dataService, timerServ
 	$scope.addAddress = function (){
 		if ($scope.paymentAddress){
 			minerService.trackAddress($scope.paymentAddress);
-			//$scope.paymentAddress = "";
+			$scope.paymentAddress = "";
 		}
 	};
 

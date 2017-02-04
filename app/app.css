@@ -1,14 +1,38 @@
 html, body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   font-size:14px;
   height:100%;
   margin: 0px;
   padding: 0px;
-  background: "#f3f5f7";
+}
+
+a {
+  transition: color .4s;
+  color: #3287b3;
+}
+
+a:link { text-decoration: none; },
+a:visited { color: #3b98c8; }
+a:hover   { color: #3b98c8; }
+a:active  {
+  transition: color .3s;
+  color: #007BE6;
+}
+
+#main {
+  background: #f3f5f7;
 }
 
 md-sidenav {
   background-color: #2b333e;
+}
+
+.statsbar md-card-title-text{
+  text-align: right;
+}
+
+.statsbar md-card md-card-title {
+  padding: 12px ;
 }
 
 .md-menu-toolbar {
@@ -20,12 +44,41 @@ md-list-item > button {
   text-align:left !important;
 }
 
+md-card {
+  overflow: hidden;
+}
+
 .sidenav a {
   width: 100%;
   text-align: left;
-  color: #fff
+  color: #fff;
 }
 
 #content  {
   padding: 40px;
+}
+
+.logo {
+  background: #333d4b !important;
+}
+
+.logo i {
+  color: #00b0ff;
+  font-weight: 700;
+}
+
+/* HELPERS */
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.truncate{
+  width:20%;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis
 }

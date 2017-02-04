@@ -2,8 +2,9 @@
 
 app.controller('BlocksCtrl', function($scope, dataService) {
 	$scope.blocks = {};
+	$scope.selected = [];
 
-    dataService.getData("/pool/blocks", function(data){
+    $scope.blocksPromise = dataService.getData("/pool/blocks", function(data){
         $scope.blocks.global = data;
     });
 

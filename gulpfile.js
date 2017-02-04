@@ -45,7 +45,9 @@ gulp.task('vendor', function() {
     'app/vendor/**/ngStorage.js',
     'app/vendor/**/angular-moment.js',
     'app/vendor/**/app/angular.audio.js',
-    'app/vendor/**/moment.js'
+    'app/vendor/**/moment.js',
+    'app/vendor/**/md-data-table.js',
+    'app/vendor/**/md-data-table.css'
     ])
     .pipe(gulp.dest('build/vendor'))
 });
