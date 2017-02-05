@@ -10,6 +10,10 @@ app.controller('DashboardCtrl', function($scope , $route, dataService, timerServ
 		}
 	};
 
+	$scope.deleteAddress = function (key){
+		minerService.deleteAddress(key);
+	}
+
 	$scope.setAlarm = function(addr, bool){
 		minerService.setAlarm(addr, bool);
 	};
@@ -23,6 +27,7 @@ app.controller('DashboardCtrl', function($scope , $route, dataService, timerServ
 				$scope.poolStats[pool_type] = data;
 			});
 		});
+
         $scope.poolList.forEach(function(pool_type) {
             dataService.getData("/pool/blocks/"+pool_type, function(data){
             	if (data.length > 0){

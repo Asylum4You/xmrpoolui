@@ -60,6 +60,11 @@ angular.module('utils.services', [])
     track();
   }
 
+  this.deleteAddress = function (key) {
+    delete addrStats[key];
+    console.log("deleting");
+  };
+
   this.getData = function (){
     return addrStats;
   }
@@ -71,6 +76,7 @@ angular.module('utils.services', [])
 
   var track = function(){
     Object.keys(addrStats).forEach(function(key,index) {
+      // Get Miner stats
       dataService.getData("/miner/"+key+"/stats", function(data){
         addrStats[key] = Object.assign(addrStats[key], data);
 
@@ -79,10 +85,30 @@ angular.module('utils.services', [])
           addrStats[key].alarm = false;
         }
 
+        // Set default miner name address
+        if (addrStats[key].name === undefined) {
+          addrStats[key].name = key;
+        }
+        
         // update
         storage.minerStats = addrStats;
         callback(addrStats);
       });
+
+      // Get all miner stats 
+      // This should run only when the user is at the dashboard
+      dataService.getData("/miner/"+key+"/identifiers", function(data){
+        for (var i = 0, len = data.length; i < len; i++) {
+          console.log("/miner/"+key+"/chart/hashrate/"+data[i]);
+
+          dataService.getData("/miner/"+key+"/chart/hashrate/"+data[i], function(data){
+            console.log(data);
+          });
+        }
+        
+      });
+
+
     });
 
   }

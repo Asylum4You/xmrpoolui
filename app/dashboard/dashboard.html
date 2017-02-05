@@ -4,7 +4,7 @@
 		<md-card>
 			<md-toolbar class="md-table-toolbar md-default">
 			  <div class="md-toolbar-tools">
-			    <span class="md-title">Network Stats</span></span>
+				<span class="md-title">Network Stats</span></span>
 			  </div>
 			</md-toolbar>
 			<md-card-content>
@@ -41,7 +41,7 @@
 		<md-card>
 			<md-toolbar class="md-table-toolbar md-default">
 			  <div class="md-toolbar-tools">
-			    <span class="md-title">Pool Stats</span>
+				<span class="md-title">Pool Stats</span>
 			  </div>
 			</md-toolbar>
 			<md-card-content>
@@ -69,7 +69,10 @@
 									<md-list-item>
 										<p> Time Found </p>
 										<p class="text-right">
-											<span class="label-text" am-time-ago="poolStats[pooltype].pool_statistics.lastBlockFoundTime * 1000" uib-tooltip="{{poolStats[pooltype].pool_statistics.lastBlockFoundTime*1000 | date:'hh:mm:ss dd/mm/yy'}}" tooltip-placement="bottom">Never</span>
+											<span am-time-ago="poolStats[pooltype].pool_statistics.lastBlockFoundTime * 1000">Never</span>
+											<md-tooltip>
+												{{poolStats[pooltype].pool_statistics.lastBlockFoundTime*1000 | date:'hh:mm:ss dd/mm/yy'}}
+											</md-tooltip>
 										</p>
 									</md-list-item>
 								</md-list>
@@ -107,20 +110,20 @@
 </div>
 
 <form layout layout-align="center" layout-padding>
-    <div layout="row" flex>
-        <md-input-container flex class="md-icon-float md-block md-title">
-            <label>Enter Payment Address</label>
-            <!-- below is the material icons -->
-            <md-icon class="material-icons">multiline_chart</md-icon>
-            <input type="text" ng-model="paymentAddress">
-        </md-input-container>
-        <div>
-            <md-button class="md-raised md-warn" ng-click="addAddress()">
-                <md-icon md-font-set="material-icons">add</md-icon>
+	<div layout="row" flex>
+		<md-input-container flex class="md-icon-float md-block md-title">
+			<label>Enter Payment Address</label>
+			<!-- below is the material icons -->
+			<md-icon class="material-icons">multiline_chart</md-icon>
+			<input type="text" ng-model="paymentAddress">
+		</md-input-container>
+		<div>
+			<md-button class="md-raised md-primary" ng-click="addAddress()">
+				<md-icon md-font-set="material-icons">add</md-icon>
 				Track Live Stats
-            </md-button>
-        </div>
-    </div>  
+			</md-button>
+		</div>
+	</div>  
 </form>
 
 <div layout-md="column" layout-sm="column" layout-xs="column" layout="row" flex ng-repeat="(key,miner) in trackedAddresses">
@@ -128,37 +131,63 @@
 		<md-card>
 			<md-toolbar class="md-accent">
 			  <div class="md-toolbar-tools">
-			    <span class="md-title">{{key}}</span></span>
+			  	<md-input-container flex="60" class="md-icon-float md-block md-body-1 hide-error-msg">
+					<label>Name your Miner Group</label>
+					<!-- below is the material icons -->
+					<md-icon class="material-icons">multiline_chart</md-icon>
+					<input type="text" ng-model="miner.name">
+					<md-tooltip>
+						{{key}}
+					</md-tooltip>
+				</md-input-container>
+				<span class="md-caption">
+					( Last Hash : <span am-time-ago="miner.lastHash * 1000">Never</span> )
+					<md-tooltip>
+						{{miner.lastHash*1000 | date:'hh:mm:ss dd/mm/yy'}}
+					</md-tooltip>
+				</span>
+				<span flex></span>
+				<span>
+					
+						<md-button class="md-fab md-mini md-warn" ng-click="deleteAddress(key)">
+							<md-icon md-font-set="material-icons">delete</md-icon>
+						</md-button>
+					
+					
+				</span>
 			  </div>
 			</md-toolbar>
 			<md-card-content>
-				<md-list>
-					<md-list-item>
-						<p> Hash Rate </p>
+				<md-grid-list md-cols="1" md-cols-sm="2" md-cols-md="2" md-cols-gt-md="4" md-row-height-gt-md="4:1" md-row-height="4:1" md-gutter="8px" md-gutter-gt-sm="4px" >
+					<md-grid-tile md-rowspan="1" md-colspan="1">
+						<p> Hash Rate </p><br/>
 						<p class="text-right">{{miner.hash | toHashRate}}</p>
-					</md-list-item>
-					<md-list-item>
-						<p> Total Hashes </p>
+					</md-grid-tile>
+					<md-grid-tile md-rowspan="1" md-colspan="1">
+						<p> Total Hashes </p><br/>
 						<p class="text-right">{{miner.totalHashes | number}}</p>
-					</md-list-item>
-					<md-list-item>
-						<p> Total Due </p>
+					</md-grid-tile>
+					<md-grid-tile md-rowspan="1" md-colspan="1">
+						<p> Total Due </p><br/>
 						<p class="text-right">{{miner.amtDue | toXMR | number:10}} XMR</p>
-					</md-list-item>
-					<md-list-item>
-						<p> Total Paid </p>
-						<p class="text-right">{{miner.amtPaid | toXMR | number:10}} XMR<</p>
-					</md-list-item>
-					<md-list-item>
-						<p> Last Hash </p>
-						<p class="text-right"><span am-time-ago="miner.lastHash * 1000" uib-tooltip="{{miner.lastHash*1000 | date:'hh:mm:ss dd/mm/yy'}}" tooltip-placement="bottom"></span></p>
-					</md-list-item>
-					<md-list-item>
-						<p> Alarm </p>
-						<p class="text-right"><md-checkbox ng-model="miner.alarm" ng-change="setAlarm(key, miner.alarm)"/></p>
-					</md-list-item>
-				</md-list>
+					</md-grid-tile>
+					<md-grid-tile md-rowspan="1" md-colspan="1">
+						<p> Total Paid </p><br/>
+						<p class="text-right">{{miner.amtPaid | toXMR | number:10}} XMR</p>
+					</md-grid-tile>
+				</md-grid-list>
+			<md-card-content>
+				<md-card-content>
+			  		<md-card-title-text flex layout="row">
+						{{miner}}
+			  		</md-card-title-text>
+				</md-card-content>
 			</md-card-content>
+			<md-card-actions layout="row" layout-align="end center" flex>
+			  <md-checkbox ng-model="miner.alarm" ng-change="setAlarm(key, miner.alarm)"></md-checkbox>
+			  <span flex></span>
+	          <md-button class="md-raised md-primary">View Payments</md-button>
+	        </md-card-actions>
 		</md-card>
 	</div>
 </div>

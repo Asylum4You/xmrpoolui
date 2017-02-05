@@ -111,6 +111,7 @@ app.controller('AppCtrl', function($scope, $window, $route, $mdSidenav, $mdMedia
 
 		$scope.globalSiren=siren;
         $scope.yourTotalHashRate = totalHashRate;
+        console.log(addrStats);
 	}
 
 	var playSiren = function (){
